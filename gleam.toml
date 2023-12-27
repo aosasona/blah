@@ -8,7 +8,7 @@ links = [
 ]
 repository = {type = "github", user = "massivefermion", repo = "blah"}
 
-gleam = ">= 0.32.0"
+gleam = ">= 0.33.0"
 internal_modules = [
   "blah/en/*",
   "blah/utils",
@@ -16,8 +16,8 @@ internal_modules = [
 ]
 
 [dependencies]
-birl = "~> 1.0"
-gleam_stdlib = "~> 0.32"
+birl = "~> 1.1"
+gleam_stdlib = "~> 0.34"
 
 [dev-dependencies]
 gleeunit = "~> 1.0"

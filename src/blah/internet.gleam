@@ -60,7 +60,7 @@ pub fn username(name: String) {
       ]
       |> string.join("-")
 
-    7 ->
+    7 | _ ->
       [
         adjective,
         string.replace(string.lowercase(name), " ", "_"),
@@ -107,7 +107,7 @@ pub fn domain_name() {
       [adjective, noun]
       |> string.join("-")
 
-    2 ->
+    _ ->
       [adjective, noun]
       |> string.join("_")
   }
@@ -143,7 +143,7 @@ pub fn uri() {
       ]
       |> string.join("")
 
-    3 ->
+    _ ->
       [
         protocol,
         "://",
@@ -221,7 +221,7 @@ pub fn hex_color() {
 
   case nonce % 2 {
     0 -> long_hex_color()
-    1 -> short_hex_color()
+    _ -> short_hex_color()
   }
 }
 
@@ -231,8 +231,12 @@ pub fn status_code() {
 }
 
 pub fn status_code_in_class(class: HTTPStatusClass) {
-  let [#(_, codes)] =
-    list.filter(status_codes, fn(kv) { pair.first(kv) == class })
+  let codes = {
+    case list.filter(status_codes, fn(kv) { pair.first(kv) == class }) {
+      [#(_, codes)] -> codes
+      _ -> []
+    }
+  }
 
   get_random_item(codes)
 }

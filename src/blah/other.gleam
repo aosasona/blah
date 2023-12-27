@@ -47,16 +47,13 @@ pub fn uuid() {
     |> int.to_base16
     |> string.lowercase
   })
-  |> list.fold(
-    "",
-    fn(uuid, char) {
-      let uuid = string.append(uuid, char)
-      case string.length(uuid) {
-        8 | 13 | 18 | 23 -> string.append(uuid, "-")
-        _ -> uuid
-      }
-    },
-  )
+  |> list.fold("", fn(uuid, char) {
+    let uuid = string.append(uuid, char)
+    case string.length(uuid) {
+      8 | 13 | 18 | 23 -> string.append(uuid, "-")
+      _ -> uuid
+    }
+  })
 }
 
 const language_codes = [

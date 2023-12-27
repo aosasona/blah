@@ -42,7 +42,7 @@ pub fn zip_code() {
 
   case nonce % 2 {
     0 -> blah_string.with_pattern("%d%d%d%d%d-%d%d%d%d")
-    1 -> blah_string.numeric(5)
+    1 | _ -> blah_string.numeric(5)
   }
 }
 

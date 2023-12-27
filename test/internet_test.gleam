@@ -19,7 +19,10 @@ pub fn email_test() {
   list.length(email_parts)
   |> should.equal(2)
 
-  let [username, domain] = email_parts
+  let #(username, domain) = case email_parts {
+    [username, domain] -> #(username, domain)
+    _ -> #("", "")
+  }
 
   username
   |> verify_username
@@ -113,8 +116,7 @@ pub fn mongo_object_id_test() {
 }
 
 fn verify_username(username: String) -> Bool {
-  list.any(
-    string.to_graphemes(username),
-    fn(g) { list.contains([".", "-", "_"], g) || string.uppercase(g) == g },
-  )
+  list.any(string.to_graphemes(username), fn(g) {
+    list.contains([".", "-", "_"], g) || string.uppercase(g) == g
+  })
 }
